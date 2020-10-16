@@ -1,0 +1,30 @@
+---
+- name: install jdk
+  hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+  - name: install jdk
+    yum:
+      name: java-1.8.0-openjdk
+      state: installed
+  - name: display java version
+    command: java -version
+    register: output
+  - name: print java vesrion
+    debug:
+      var: output
+  - name: set java home path
+    lineinfile:
+      dest: /root/.bashrc
+      line: "{{item}}"
+    with_items:
+      - 'export JAVA_HOME="/usr/lib/jvm/jre-8-openjdk"'
+      - 'export PATH="$JAVA_HOME/bin:$PATH"'
+  - name: check java version
+    command: java -version
+    register: output1
+  - name: print java version
+    debug:
+      var: output1
+
