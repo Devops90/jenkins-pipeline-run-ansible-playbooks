@@ -1,5 +1,5 @@
 [test]
-54.172.128.55
+54.173.176.164
 
 [test:vars]
 ansible_user: ec2-user
